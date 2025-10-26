@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>PurpleFM — Personal Music Player</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#9b59ff">
   <style>
     :root{
       --bg:#0b0e12;--panel:#0f1316;--muted:#98a0a8;--text:#e6eef6;--accent:#9b59ff;--accent-2:#7b4bff;--glass:rgba(255,255,255,0.03);
@@ -268,6 +270,17 @@
 
     // init DB and load
     (async ()=>{ try{ await openDB(); await loadTracks(); loadSettings(); if(!document.documentElement.getAttribute('data-theme')) document.documentElement.setAttribute('data-theme','dark'); updateThemeButton(); }catch(e){ console.error(e); } })();
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+        console.log('ServiceWorker registered: ', registration);
+      }).catch(function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
   </script>
 </body>
 </html>
